@@ -3,6 +3,10 @@ const { getAllUsers, createUser, getUser, updateUser, deleteUser } = require('./
 
 const router = express.Router()
 
+router.param('id', (req,res, next, val) => {
+    next()
+})
+
 router
     .route('/')
     .get(getAllUsers)
