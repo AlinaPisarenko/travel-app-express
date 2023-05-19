@@ -1,11 +1,15 @@
 const express = require('express')
 const { getAllUsers, createUser, getUser, updateUser, deleteUser } = require('./../controllers/userController')
+const { signup } = require('./../controllers/authController')
 
 const router = express.Router()
 
-router.param('id', (req,res, next, val) => {
-    next()
-})
+// router.param('id', (req,res, next, val) => {
+//     next()
+// })
+
+router
+    .post('/signup', signup)
 
 router
     .route('/')
