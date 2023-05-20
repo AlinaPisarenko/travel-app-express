@@ -4,9 +4,6 @@ const { signup, login } = require('../controllers/authController')
 
 const router = express.Router()
 
-// router.param('id', (req,res, next, val) => {
-//     next()
-// })
 
 router
     .post('/signup', signup)
