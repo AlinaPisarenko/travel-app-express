@@ -40,8 +40,12 @@ const userSchema = new mongoose.Schema({
     },
     passwordChangedAt: Date,
     passwordResetToken: String,
-
-    passwordResetExpires: Date
+    passwordResetExpires: Date,
+    active: {
+        type: Boolean,
+        default: true,
+        select: false
+    }
 })
 
 userSchema.pre('save', async function(next) {
@@ -61,6 +65,12 @@ userSchema.pre('save', async function(next) {
     next()
 })
 
+// filtering inactive users
+userSchema.pre(/^find/, function(next) {
+    this.find({ active: { $ne: false } })
+    next()
+})
+
 userSchema.methods.correctPassword = async (candidatePassword, userPassword) => {
     return await bcrypt.compare(candidatePassword, userPassword)
 }
@@ -76,6 +86,8 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
     // return false if the password wasn't changed
     return false
 }
+
+
 
 userSchema.methods.createPasswordResetToken = function() {
     const resetToken = crypto.randomBytes(32).toString('hex')
