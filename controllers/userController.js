@@ -13,20 +13,10 @@ const filterObj = (obj, ...allowedFields) => {
 
 // ROUTE HANDLERS USERS
 
-// GET
-exports.getAllUsers = catchAsync(async (req,res, next) => {
-
-        const users = await User.find()
-
-        //SEND RESPONSE
-        res.status(200).json({
-            status: 'success',
-            result: users.length,
-            data: {
-                users
-        }
-    })  
-})
+exports.getAllUsers = factory.getAll(User)
+exports.getUser = factory.getOne(User)
+exports.updateUser = factory.updateOne(User)
+exports.deleteUser = factory.deleteOne(User)
 
 // Updating current user data
 exports.updateMe = catchAsync(async (req,res,next) => {
@@ -62,21 +52,9 @@ exports.deleteMe = catchAsync(async (req,res,next) => {
     })
 })
 
-exports.getUser = (req,res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'Route is not defined'
-    })
-}
-
 exports.createUser = (req,res) => {
     res.status(500).json({
         status: 'error',
-        message: 'Route is not defined'
+        message: 'This route is not defined, please use sign up instead'
     })
 }
-
-
-exports.updateUser = factory.updateOne(User)
-
-exports.deleteUser = factory.deleteOne(User)
