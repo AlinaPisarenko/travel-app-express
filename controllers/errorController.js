@@ -59,7 +59,6 @@ const sendErrorProduction = (err,res) => {
 }
 
 module.exports = (err, req, res, next) => {
-    // console.log(err.stack) //displays where the err happened
     err.statusCode = err.statusCode || 500
     err.status = err.status || 'error'
 
