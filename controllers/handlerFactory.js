@@ -3,7 +3,7 @@ const AppError = require('./../utils/appError')
 const APIFeatures = require('./../utils/apiFeatures')
 
 // GET
-exports.getAll = (Model) => catchAsync(async (req,res, next) => {
+exports.getAll = Model => catchAsync(async (req,res, next) => {
     // To allow for nested get reviews on Tour
     let filter = {}
     if (req.params.tourId) filter = {tour: req.params.tourId}
@@ -16,6 +16,7 @@ exports.getAll = (Model) => catchAsync(async (req,res, next) => {
         .paginate()
          
     const docs = await features.query
+    // const docs = await features.query.explain() // query stats
 
     //SEND RESPONSE
     res.status(200).json({
