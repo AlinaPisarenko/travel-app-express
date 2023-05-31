@@ -1,7 +1,8 @@
 const express = require('express')
-const { getAllTours, createTour, getTour, updateTour, deleteTour, aliasTopTours, getTourStats, getMonthlyPlan } = require('./../controllers/tourController')
+const { getAllTours, createTour, getTour, updateTour, deleteTour, aliasTopTours, getTourStats, getMonthlyPlan, getToursWithin } = require('./../controllers/tourController')
 const authController = require('../controllers/authController')
 const reviewRouter = require('../routes/reviewRoutes')
+const { originAgentCluster } = require('helmet')
 
 
 const router = express.Router()
@@ -23,6 +24,10 @@ router
 router
     .route('/tour-stats')
     .get(getTourStats)
+
+router
+    .route('/tours-within/:distance/center/:latlng/unit/:unit')
+    .get(getToursWithin)
 
 router
     .route('/')
