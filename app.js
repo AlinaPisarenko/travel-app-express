@@ -23,44 +23,61 @@ app.set('views', path.join(__dirname, 'views'))
 
 // GLOBAL MIDDLEWARE
 
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) 
+
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Set security HTTP headers
-app.use(helmet())
-
+// app.use(helmet())
+// app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "script-src  'self' api.mapbox.com",
+    "script-src-elem 'self' api.mapbox.com",
+  );
+  next();
+});
 
 // Configuration for mapbox
-const scriptSrcUrls = [
-  'https://api.tiles.mapbox.com/',
-  'https://api.mapbox.com/',
-];
-const styleSrcUrls = [
-  'https://api.mapbox.com/',
-  'https://api.tiles.mapbox.com/',
-  'https://fonts.googleapis.com/',
-];
-const connectSrcUrls = [
-  'https://api.mapbox.com/',
-  'https://a.tiles.mapbox.com/',
-  'https://b.tiles.mapbox.com/',
-  'https://events.mapbox.com/',
-];
-const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: [],
-      connectSrc: ["'self'", ...connectSrcUrls],
-      scriptSrc: ["'self'", ...scriptSrcUrls],
-      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-      workerSrc: ["'self'", 'blob:'],
-      objectSrc: [],
-      imgSrc: ["'self'", 'blob:', 'data:'],
-      fontSrc: ["'self'", ...fontSrcUrls],
-    },
-  })
-);
+// const scriptSrcUrls = [
+//   'https://api.tiles.mapbox.com/',
+//   'https://api.mapbox.com/',
+// ];
+// const styleSrcUrls = [
+//   'https://api.mapbox.com/',
+//   'https://api.tiles.mapbox.com/',
+//   'https://fonts.googleapis.com/',
+// ];
+// const connectSrcUrls = [
+//   'https://api.mapbox.com/',
+//   'https://a.tiles.mapbox.com/',
+//   'https://b.tiles.mapbox.com/',
+//   'https://events.mapbox.com/',
+// ];
+// const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: [],
+//       connectSrc: ["'self'", ...connectSrcUrls],
+//       scriptSrc: ["'self'", ...scriptSrcUrls],
+//       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+//       workerSrc: ["'self'", 'blob:'],
+//       objectSrc: [],
+//       imgSrc: ["'self'", 'blob:', 'data:'],
+//       fontSrc: ["'self'", ...fontSrcUrls],
+//     },
+//   })
+// );
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
