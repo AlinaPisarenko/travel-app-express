@@ -23,11 +23,13 @@ const createSendToken = (user, statusCode, res) => {
 
     if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
     
-    res.cookie('jwt', token, cookieOptions)
-
+    // res.cookie('jwt', token, cookieOptions)
+    // console.log(res, '💥💥💥💥')
     user.password = undefined 
     
-    res.status(statusCode).json({
+    res
+        .cookie('jwt', token, cookieOptions)
+        .status(statusCode).json({
         status: 'success',
         token,
         data: {
@@ -50,6 +52,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 })
 
 exports.login = catchAsync(async (req, res, next) => {
+    console.log(req.body)
     const { email, password } = req.body
 
     // 1. Check if email and password exist
@@ -72,6 +75,8 @@ exports.protect = catchAsync(async (req,res,next) => {
     if (req.headers.authorization && 
         req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1]
+    } else if (req.cookies.jwt) {
+        token = req.cookies.jwt
     }
 
     if(!token) {
