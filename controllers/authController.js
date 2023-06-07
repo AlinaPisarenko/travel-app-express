@@ -71,6 +71,31 @@ exports.login = catchAsync(async (req, res, next) => {
     createSendToken(user, 200, res)
 })
 
+
+// Only for rendered pages
+exports.isLoggedIn = catchAsync(async (req,res,next) => {
+    
+    if (req.cookies.jwt) {
+       
+        // 1. Verifying token
+        const decoded = await promisify(jwt.verify)(req.cookie.jwt, process.env.JWT_SECRET)
+
+        // 2. Check if user still exists
+        const currentUser = await User.findById(decoded.id)
+        if (!currentUser) return next()
+        
+        // 2. Check if user recently changed password
+        if (currentUser.changedPasswordAfter(decoded.iat)) return next()
+        
+        // If user exists:
+        res.locals.user = currentUser
+        next()
+    }
+    next()
+})
+
+
+
 exports.protect = catchAsync(async (req,res,next) => {
     let token
     // 1. Getting token and checking if it exist
