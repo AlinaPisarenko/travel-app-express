@@ -12054,6 +12054,8 @@ var login = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+
+// Logging out
 exports.login = login;
 var logout = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -12066,7 +12068,10 @@ var logout = /*#__PURE__*/function () {
           return _axios.default.get('/api/v1/users/logout');
         case 3:
           res = _context2.sent;
-          if (res.data.status === 'success') location.reload(true);
+          if (res.data.status === 'success') {
+            location.reload(true);
+            location.assign('/');
+          }
           _context2.next = 10;
           break;
         case 7:
