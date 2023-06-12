@@ -133,10 +133,10 @@ body {
     linear,
     left top,
     right top,
-    from(#ff7730),
-    to(#eb4d4b)
+    from(#87A2FB),
+    to(#6F38C5)
   );
-  background-image: linear-gradient(to right, #ff7730, #eb4d4b);
+  background-image: linear-gradient(to right, #87A2FB, #6F38C5);
   font-size: 3.5rem;
 }
 
@@ -1197,23 +1197,17 @@ body {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   max-width: 80rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  
 }
 .error__title {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  margin-bottom: 1rem;
+  text-align: center;
+  
 }
 .error__emoji {
   font-size: 3.75rem;
-  margin-left: 1rem;
+  text-align: center;
 }
 .error__msg {
   font-size: 2.5rem;
