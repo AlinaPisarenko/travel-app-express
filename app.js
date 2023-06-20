@@ -19,6 +19,7 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true, limit: '10kb' }))
 app.use(cookieParser())
 // Set pug engine
 app.set('view engine', 'pug')
