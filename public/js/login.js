@@ -35,12 +35,20 @@ export const logout = async () => {
 
 
 //signnup
- export const signup = async (email, password) => {
+ export const signup = async (name, email, password, passwordConfirm) => {
+
+     const newUser = {
+        name,
+        email,
+        password,
+        passwordConfirm,
+        role: 'user'
+    }
   
   try {
     const res = await axios.post(
         '/api/v1/users/signup', 
-        { email, password }, 
+        newUser, 
         )
   
    console.log('response', res)

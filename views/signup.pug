@@ -6,8 +6,11 @@ block main
             h2.heading-secondary.ma-bt-lg Sign up
             form.form.form--signup
                 .form__group
+                    label.form__label(for='user_name') Your name
+                    input#user_name.form__input(type='text', placeholder='Hermione Granger', required)
+                .form__group
                     label.form__label(for='email') Email address
-                    input#email.form__input(type='email', placeholder='you@example.com', required)
+                    input#email.form__input(type='email', placeholder='hermione@example.com', required)
                 .form__group.ma-bt-md
                     label.form__label(for='password') Password
                     input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')

@@ -1,6 +1,7 @@
 import '@babel/polyfill'
 import { displayMap } from './mapbox'
 import { login, signup, logout } from './login'
+import { updateInfo } from './updateSettings'
 import { showAlert } from './alerts'
 
 
@@ -9,6 +10,7 @@ const mapBox = document.getElementById('map')
 const loginForm = document.querySelector('.form--login')
 const signupForm = document.querySelector('.form--signup')
 const logoutBtn = document.querySelector('.nav__el--logout')
+const userDataForm = document.querySelector('.form-user-data')
 // VALUES
 
 
@@ -32,13 +34,14 @@ if (signupForm) {
     e.preventDefault()
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
-    const confirmPasswordField = document.getElementById('confirm_password');
+    const confirmPasswordField = document.getElementById('confirm_password').value
+    const name = document.getElementById('user_name').value
 
-    // if (password !== confirmPasswordField.value) {
-    //     showAlert('error', "Passwords don't match 😔 Please try again")
-    // } else {
-        signup(email,password)
-    // }
+    if (password !== confirmPasswordField.value) {
+        showAlert('error', "Passwords don't match 😔 Please try again")
+    } else {
+        signup(name, email,password, confirmPasswordField)
+    }
     
 })
 }
