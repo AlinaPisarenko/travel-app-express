@@ -47,3 +47,12 @@ if (signupForm) {
 }
 
 if (logoutBtn) logoutBtn.addEventListener('click', logout)
+
+if (userDataForm) {
+    userDataForm.addEventListener('submit', e  => {
+    e.preventDefault()
+    const email = document.getElementById('email').value
+    const name = document.getElementById('name').value
+    updateInfo(name, email)
+})
+}
