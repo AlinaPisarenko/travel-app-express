@@ -1,5 +1,15 @@
 const express = require('express')
-const { getAllTours, createTour, getTour, updateTour, deleteTour, aliasTopTours, getTourStats, getMonthlyPlan, getToursWithin, getDistances } = require('./../controllers/tourController')
+const { getAllTours, 
+    createTour, 
+    getTour, updateTour, 
+    deleteTour, 
+    aliasTopTours, 
+    getTourStats, 
+    getMonthlyPlan, 
+    getToursWithin, 
+    getDistances, 
+    resizeTourImages,
+    uploadTourImages } = require('./../controllers/tourController')
 const authController = require('../controllers/authController')
 const reviewRouter = require('../routes/reviewRoutes')
 // const { originAgentCluster } = require('helmet')
@@ -47,6 +57,8 @@ router
     .patch(
         authController.protect, 
         authController.restrictTo('admin', 'lead-guide'), 
+        uploadTourImages,
+        resizeTourImages,
         updateTour
         )
     .delete(
