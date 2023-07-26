@@ -12111,7 +12111,7 @@ var signup = /*#__PURE__*/function () {
           res = _context3.sent;
           console.log('response', res);
           if (res.data.status === 'success') {
-            (0, _alerts.showAlert)('success', 'Signed up in successfully!');
+            (0, _alerts.showAlert)('success', 'Signed up in successfully! Check your email ✉️');
             window.setTimeout(function () {
               location.assign('/');
             }, 1000);
@@ -12350,7 +12350,7 @@ if (signupForm) {
     var password = document.getElementById('password').value;
     var confirmPasswordField = document.getElementById('confirm_password').value;
     var name = document.getElementById('user_name').value;
-    if (password !== confirmPasswordField.value) {
+    if (password !== confirmPasswordField) {
       (0, _alerts.showAlert)('error', "Passwords don't match 😔 Please try again");
     } else {
       (0, _login.signup)(name, email, password, confirmPasswordField);
@@ -12428,7 +12428,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65013" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55430" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -10,7 +10,14 @@ const {
     uploadUserPhoto,
     resizeUserPhoto 
 } = require('./../controllers/userController')
-const { signup, login, logout, forgotPassword, resetPassword, updatePassword, protect, restrictTo } = require('../controllers/authController')
+
+const { signup, 
+    login, logout, 
+    forgotPassword, 
+    resetPassword, 
+    updatePassword, 
+    protect, 
+    restrictTo } = require('../controllers/authController')
 
 
 

@@ -39,7 +39,7 @@ if (signupForm) {
     const confirmPasswordField = document.getElementById('confirm_password').value
     const name = document.getElementById('user_name').value
 
-    if (password !== confirmPasswordField.value) {
+    if (password !== confirmPasswordField) {
         showAlert('error', "Passwords don't match 😔 Please try again")
     } else {
         signup(name, email,password, confirmPasswordField)

@@ -53,7 +53,7 @@ export const logout = async () => {
   
    console.log('response', res)
     if (res.data.status === 'success') {
-      showAlert('success', 'Signed up in successfully!');
+      showAlert('success', 'Signed up in successfully! Check your email ✉️');
       window.setTimeout(() => {
         location.assign('/');
       }, 1000);
