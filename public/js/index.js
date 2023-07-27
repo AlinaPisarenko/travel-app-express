@@ -3,6 +3,7 @@ import { displayMap } from './mapbox'
 import { login, signup, logout } from './login'
 import { updateInfo } from './updateSettings'
 import { showAlert } from './alerts'
+import { bookTour } from './stripe'
 
 
 // DOM ELEMENTS
@@ -12,6 +13,7 @@ const signupForm = document.querySelector('.form--signup')
 const logoutBtn = document.querySelector('.nav__el--logout')
 const userDataForm = document.querySelector('.form-user-data')
 const userPasswordForm = document.querySelector('.form-user-password')
+const bookBtn = document.getElementById('book-tour')
 
 // VALUES
 
@@ -76,5 +78,13 @@ if (userPasswordForm) {
     document.getElementById('password').value = ''
     document.getElementById('password-current').value = ''
 
-})
+}) 
+}
+
+if (bookBtn) {
+    bookBtn.addEventListener('click', e => {
+        e.target.textContent = 'Processing...'
+        const { tourId } = e.target.dataset
+        bookTour(tourId)
+    })
 }
